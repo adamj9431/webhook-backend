@@ -1,4 +1,4 @@
-# Webhook-Backend
+# Webhook Backend
 This is a simple webhook backend pattern for webhooks in Watson Assistant. This pattern is intended for simple to moderate complexity glue-code-type use cases where the webhook is essentially proxying calls to integrate with backend systems.
 
 ## Organization
