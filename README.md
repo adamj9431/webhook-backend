@@ -43,3 +43,16 @@ ibmcloud cf set-env webhook-backend TWC_API_KEY <YOUR TWC API KEY>
 ```bash
 ibmcloud cf restage webhook-backend
 ```
+
+## Using From Watson Assistant
+
+1. Set up the webhook URL
+<img src='./docs/images/wa_options_webhook.png'>
+
+2. Add the credentials (from `src/config/auth.json`)
+<img src='./docs/images/wa_options_password.png'>
+
+3. Use the webhook in node(s) in your dialog flow
+<img src='./docs/images/wa_node_settings.png'>
+
+Note: The webhook response will be saved to the variable you set in the **Return variable** field on the node settings. You can access nested values using a period, i.e. `$current_conditions.temperature`.
