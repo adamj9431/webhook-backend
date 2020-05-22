@@ -1,3 +1,2 @@
-const numbers = require('./numbers')
-
-module.exports = { numbers }
+const twc = require('./twc')
+module.exports = { twc }

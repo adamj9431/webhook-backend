@@ -1,0 +1,10 @@
+---
+applications:
+- name: webhook-backend
+  buildpacks: 
+    - sdk-for-nodejs
+  # random-route: true
+  memory: 256M
+  routes:
+    # change the subdomain to a custom value, e.g. webhook-backend-johndoe.mybluemix.net
+    - route: webhook-backend-8AvDKx.mybluemix.net
