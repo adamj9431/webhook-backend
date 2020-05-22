@@ -1,10 +1,33 @@
 # Webhook-Backend
-This is a simple webhook backend pattern for webhooks in Watson Assistant.
+This is a simple webhook backend pattern for webhooks in Watson Assistant. This pattern is intended for simple to moderate complexity glue-code-type use cases where the webhook is essentially proxying calls to integrate with backend systems.
+
+## Organization
+- Datasource interface code (backend systems) goes in `src/datasources`
+- Route handlers for webhook actions go in `src/routes/api/webhook`
+
+```
+src
+|- config
+|  |- auth.json
+|
+|- datasources
+|  |- index.js
+|  |- twc.js
+|
+|- routes
+|  |- api
+|     |- webhook
+|        |- index.js
+|        |- weather.js
+|
+|- app.js
+|- utils.js
+```
 
 ## Deploying
-1. Ensure you have the [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-install-ibmcloud-cli#install-ibmcloud-cli) installed
+1. Ensure you have the [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-install-ibmcloud-cli#install-ibmcloud-cli) and Git installed. Alternately, you can follow the below steps in the [IBM Cloud Shell](https://cloud.ibm.com/docs/cloud-shell?topic=cloud-shell-getting-started) environment.
 
-2. Log in to the CLI 
+2. Log in to the CLI (skip if using IBM Cloud Shell)
 ```bash
 ibmcloud login --sso
 ```
@@ -44,7 +67,7 @@ ibmcloud cf set-env webhook-backend TWC_API_KEY <YOUR TWC API KEY>
 ibmcloud cf restage webhook-backend
 ```
 
-## Using From Watson Assistant
+## Using the Webhook From Watson Assistant
 
 1. Set up the webhook URL
 <img src='./docs/images/wa_options_webhook.png'>
