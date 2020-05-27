@@ -47,7 +47,7 @@ module.exports.current_conditions = async function(args) {
 
 /**
  * TWC Daily Forecast
- * See https://weather.com/swagger-docs/ui/sun/v3/sunV3CurrentsOnDemand.json
+ * See https://docs.google.com/document/d/1RY44O8ujbIA_tjlC4vYKHKzwSwEmNxuGw5sEJ9dYjG4/edit
  * @param {Object} args
  * @param {string} args.postalCode - Postal code for desired location
  * @param {string} args.countryCode - Two-letter country code for desired location
@@ -56,7 +56,7 @@ module.exports.current_conditions = async function(args) {
  * @param {string} [args.language=en-US] - Language code 
  */
 module.exports.forecast = async function(args) {
-    const { postalCode, countryCode, days = 7, units = MEASUREMENT_UNITS.IMPERIAL, language = 'en-US' } = args;
+    const { postalCode, countryCode, days = 3, units = MEASUREMENT_UNITS.IMPERIAL, language = 'en-US' } = args;
     try {
         const postalKey = `${postalCode}:4:${countryCode}`
         const result = await axios.get(`${API_BASE}/v3/wx/forecast/daily/${days}day`, {
@@ -73,4 +73,18 @@ module.exports.forecast = async function(args) {
         console.error("Error when calling API using inputs:", args)
         throw e
     }
+}
+
+/**
+ * Get weather URL for postal code (supports only US ZIP)
+ * @param {Object} args
+ * @param {string} args.postalCode - Postal code for desired location
+ */
+module.exports.url = function(args) {
+    const { postalCode } = args;
+
+    if (!postalCode.match(/^[0-9]{5}$/)) {
+        throw new Error("Malformed postalCode, currently only US five-digit ZIP codes are supported!")
+    }
+    return `https://weather.com/weather/today/l/${postalCode}`
 }

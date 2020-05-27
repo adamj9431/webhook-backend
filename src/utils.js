@@ -7,3 +7,8 @@ module.exports.handle_action = function(actionName, handler) {
         }
     }
 }
+module.exports.postal_code_cleanup = function(postalCode) {
+    // remove all whitespace
+    let val = postalCode.replace(/\s/g, '')
+    return val
+}
