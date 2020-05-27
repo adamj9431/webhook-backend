@@ -3,11 +3,10 @@ const { handle_action, postal_code_cleanup } = require('../../../utils')
 const { twc } = require('../../../datasources')
 
 router.post('/', handle_action('weather.current_conditions', async function(req, res, next) {
-
-  let { postalCode, countryCode = 'US' } = req.body
-  postalCode = postal_code_cleanup(postalCode)
-
   try {
+    let { postalCode, countryCode = 'US' } = req.body
+    postalCode = postal_code_cleanup(postalCode)
+
     const result = await twc.current_conditions({ postalCode, countryCode })
     result.url = twc.url({ postalCode }) // add the URL to the weather.com page for this location
     res.status(200).json(result)
@@ -22,10 +21,11 @@ router.post('/', handle_action('weather.current_conditions', async function(req,
 
 router.post('/', handle_action("weather.forecast", async function(req, res, next) {
 
-    let { postalCode, countryCode = 'US' } = req.body
-    postalCode = postal_code_cleanup(postalCode)
-
     try {
+      
+      let { postalCode, countryCode = 'US' } = req.body
+      postalCode = postal_code_cleanup(postalCode)
+
       const result = await twc.forecast({ postalCode, countryCode })
       res.status(200).json(result)
     } catch(e) {
